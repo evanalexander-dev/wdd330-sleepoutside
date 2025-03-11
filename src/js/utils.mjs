@@ -25,7 +25,7 @@ export function setClick(selector, callback) {
 // Render a list of elements using a template function
 export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
   if (clear) {
-    parentElement.innerHTML = ""; // limpiar el contenido anterior
+    parentElement.innerHTML = ""; 
   }
 
   const htmlStrings = list.map(templateFn);

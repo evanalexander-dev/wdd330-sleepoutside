@@ -1,6 +1,6 @@
 import { renderListWithTemplate } from "./utils.mjs";
 
-// Template function: devuelve el HTML de una tarjeta
+
 function productCardTemplate(product) {
     return `
       <li class="product-card">
