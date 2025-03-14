@@ -20,6 +20,9 @@ export default class ProductDetails {
     setLocalStorage("so-cart", cartContent);
   }
   renderProductDetails(selector) {
+    const title = document.querySelector("title");
+    title.innerText = `Sleep Outside | ${this.product.Name}`;
+
     const element = document.querySelector(selector);
     element.insertAdjacentHTML("beforeend", `<section class="product-detail">
       <h3>${this.product.Brand.Name}</h3>
