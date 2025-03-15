@@ -1,6 +1,3 @@
-import { renderListWithTemplate } from "./utils.mjs";
-
-
 function productCardTemplate(product) {
   // Calcular si hay descuento
   const hasDiscount = product.FinalPrice < product.SuggestedRetailPrice;
@@ -27,28 +24,31 @@ function productCardTemplate(product) {
     </li>
   `;
 }
-  
-export default class ProductList {
-    constructor(category, dataSource, listElement) {
-      this.category = category;
-      this.dataSource = dataSource;
-      this.listElement = listElement;
-    }
-  
-    async init() {
-      const list = await this.dataSource.getData();
-      //const filteredList = list.filter(product => this.hasDetailPage(product));
-      this.renderList(filteredList);
-    }
-  
-    renderList(productList) {
-        renderListWithTemplate(productCardTemplate, this.listElement, productList, "afterbegin", true);
-    }
-  
 
-    hasDetailPage(product) {
-      const allowedIds = ["880RR", "985RF"]; 
-      return allowedIds.includes(product.Id);
-    }
+
+export default class ProductList {
+  constructor(category, dataSource, listElement) {
+    this.category = category;
+    this.dataSource = dataSource;
+    this.listElement = listElement;
+  }
+
+  async init() {
+    const list = await this.dataSource.getData();
+    this.renderList(list); // ← Mostrar todos los productos
+  }
+
+  renderList(productList) {
+    const htmlString = productList.map(productCardTemplate).join("");
+    this.listElement.innerHTML = htmlString;
+  }
+
+  // Método auxiliar: verifica si hay un archivo HTML para ese producto
+  hasDetailPage(product) {
+    // Este método puede ser más complejo si lo deseas, por ahora asumimos que
+    // solo los productos que tienen un HTML de detalles (Id.html) deben mostrarse.
+    // Aquí puedes hacer una comparación simple por lista blanca, si sabes cuáles sí tienen página.
+    const allowedIds = ["880RR", "985RF"]; // ← Solo mostrar estos por ahora
+    return allowedIds.includes(product.Id);
+  }
 }
-  
