@@ -21,3 +21,27 @@ export function setClick(selector, callback) {
   });
   qs(selector).addEventListener("click", callback);
 }
+
+export function getParam(param) {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const product = urlParams.get(param);
+
+  return product;
+}
+
+export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
+  if (clear == true) {
+    parentElement.innerHTML = "";
+    // alert(`${parentElement} is cleared`);
+  }
+  // console.log(`${parentElement} is cleared`);
+
+  // renderList(list) {
+  //     // const htmlStrings = list.map(productCardTemplate);
+  //     // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
+  // }
+  const htmlStrings = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+
+}
