@@ -27,3 +27,28 @@ export function getParam(param) {
   const urlParams = new URLSearchParams(queryString);
   return urlParams.get(param);
 }
+
+export function renderCartIcon() {
+  const cart = document.querySelector('.cart');
+
+  const cartLink = document.createElement('a');
+  cartLink.href = `${location.origin}/cart/index.html`;
+
+  cartLink.innerHTML = `
+    <span id="cart-quantity-items"></span>
+    <img src="/images/cart-icon.svg" alt="Cart Icon">
+  `;
+
+  handleCartChange(cartLink.querySelector('#cart-quantity-items'));
+
+  cart.appendChild(cartLink);
+}
+
+export function handleCartChange(cartQuantityElement = document.getElementById('cart-quantity-items')) {
+  const cartItems = getLocalStorage('so-cart');
+  if (cartItems) {
+    const cartQuantity = cartItems.length;
+    cartQuantityElement.innerText = cartQuantity;
+    cartQuantityElement.classList.add('active');
+  }
+}
