@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, handleCartChange, setLocalStorage } from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -18,6 +18,7 @@ export default class ProductDetails {
     const cartContent = getLocalStorage("so-cart") || [];
     cartContent.push(this.product);
     setLocalStorage("so-cart", cartContent);
+    handleCartChange();
   }
   renderProductDetails(selector) {
     const title = document.querySelector("title");
