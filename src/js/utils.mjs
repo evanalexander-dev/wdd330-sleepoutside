@@ -25,23 +25,30 @@ export function setClick(selector, callback) {
 export function getParam(param) {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const product = urlParams.get(param);
-
-  return product;
+  return urlParams.get(param);
 }
 
-export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
-  if (clear == true) {
-    parentElement.innerHTML = "";
-    // alert(`${parentElement} is cleared`);
+export function renderCartIcon() {
+  const cart = document.querySelector('.cart');
+
+  const cartLink = document.createElement('a');
+  cartLink.href = `${location.origin}/cart/index.html`;
+
+  cartLink.innerHTML = `
+    <span id="cart-quantity-items"></span>
+    <img src="/images/cart-icon.svg" alt="Cart Icon">
+  `;
+
+  handleCartChange(cartLink.querySelector('#cart-quantity-items'));
+
+  cart.appendChild(cartLink);
+}
+
+export function handleCartChange(cartQuantityElement = document.getElementById('cart-quantity-items')) {
+  const cartItems = getLocalStorage('so-cart');
+  if (cartItems) {
+    const cartQuantity = cartItems.length;
+    cartQuantityElement.innerText = cartQuantity;
+    cartQuantityElement.classList.add('active');
   }
-  // console.log(`${parentElement} is cleared`);
-
-  // renderList(list) {
-  //     // const htmlStrings = list.map(productCardTemplate);
-  //     // this.listElement.insertAdjacentHTML('afterbegin', htmlStrings.join(''));
-  // }
-  const htmlStrings = list.map(templateFn);
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
-
 }
