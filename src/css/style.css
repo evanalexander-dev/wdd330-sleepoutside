@@ -202,6 +202,19 @@ button {
   grid-column: 3;
 }
 
+/*Discount tag style*/
+.discount-tag {
+  display: inline-block;
+  background-color: #ff4444;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-top: 5px;
+}
+
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -220,3 +233,5 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+

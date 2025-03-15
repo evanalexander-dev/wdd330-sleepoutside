@@ -2,17 +2,30 @@ import { renderListWithTemplate } from "./utils.mjs";
 
 
 function productCardTemplate(product) {
-    return `
-      <li class="product-card">
-        <a href="../product_pages/${product.Id}.html">
-          <img src="${product.Image}" alt="${product.Name}">
-          <h2 class="card__name">${product.NameWithoutBrand}</h2>
-          <p class="product-card__brand">${product.Brand?.Name || ''}</p>
-          <p class="product-card__color">${product.Colors?.[0]?.ColorName || ''}</p>
-          <p class="product-card__price">$${product.FinalPrice}</p>
-        </a>
-      </li>
-    `;
+  // Calcular si hay descuento
+  const hasDiscount = product.FinalPrice < product.SuggestedRetailPrice;
+
+  // Si hay descuento, calcula el monto y/o porcentaje
+  const discountAmount = (product.SuggestedRetailPrice - product.FinalPrice).toFixed(2);
+  const discountPercent = Math.round((discountAmount / product.SuggestedRetailPrice) * 100);
+
+  // Crear etiqueta de descuento solo si aplica
+  const discountTag = hasDiscount
+    ? `<span class="discount-tag">Save $${discountAmount} (${discountPercent}% OFF)</span>`
+    : "";
+
+  return `
+    <li class="product-card">
+      <a href="../product_pages/${product.Id}.html">
+        <img src="${product.Image}" alt="${product.Name}">
+        <h2 class="card__name">${product.NameWithoutBrand}</h2>
+        <p class="product-card__brand">${product.Brand?.Name || ''}</p>
+        <p class="product-card__color">${product.Colors?.[0]?.ColorName || ''}</p>
+        <p class="product-card__price">$${product.FinalPrice}</p>
+        ${discountTag}
+      </a>
+    </li>
+  `;
 }
   
 export default class ProductList {
