@@ -52,3 +52,12 @@ export function handleCartChange(cartQuantityElement = document.getElementById('
     cartQuantityElement.classList.add('active');
   }
 }
+
+
+export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
+  if (clear == true) {
+    parentElement.innerHTML = "";
+  }
+  const htmlStrings = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+}
