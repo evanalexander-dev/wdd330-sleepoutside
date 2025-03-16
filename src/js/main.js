@@ -6,6 +6,11 @@ import ProductList from "./ProductList.mjs";
 loadAlerts();
 renderCartIcon();
 
+const dataSource = new ProductData("tents");
+const element = document.querySelector(".product-list");
+const productList = new ProductList("Tents", dataSource, element);
+productList.init();
+
 
 const productData = new ProductData('tents');
 //  new productData(category, dataSource, listElement);

@@ -29,9 +29,9 @@ export function getParam(param) {
 }
 
 export function renderCartIcon() {
-  const cart = document.querySelector('.cart');
+  const cart = document.querySelector(".cart");
 
-  const cartLink = document.createElement('a');
+  const cartLink = document.createElement("a");
   cartLink.href = `${location.origin}/cart/index.html`;
 
   cartLink.innerHTML = `
@@ -39,18 +39,27 @@ export function renderCartIcon() {
     <img src="/images/cart-icon.svg" alt="Cart Icon">
   `;
 
-  handleCartChange(cartLink.querySelector('#cart-quantity-items'));
+  handleCartChange(cartLink.querySelector("#cart-quantity-items"));
 
   cart.appendChild(cartLink);
 }
 
-export function handleCartChange(cartQuantityElement = document.getElementById('cart-quantity-items')) {
-  const cartItems = getLocalStorage('so-cart');
+export function handleCartChange(cartQuantityElement = document.getElementById("cart-quantity-items")) {
+  const cartItems = getLocalStorage("so-cart");
   if (cartItems) {
     const cartQuantity = cartItems.length;
     cartQuantityElement.innerText = cartQuantity;
-    cartQuantityElement.classList.add('active');
+    cartQuantityElement.classList.add("active");
   }
+}
+
+export function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false) {
+  if (clear) {
+    parentElement.innerHTML = "";
+  }
+  
+  const htmlCards = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlCards.join(""));
 }
 
 
