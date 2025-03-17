@@ -57,16 +57,7 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   if (clear) {
     parentElement.innerHTML = "";
   }
-  
+
   const htmlCards = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlCards.join(""));
-}
-
-
-export function renderListWithTemplate(templateFn, parentElement, list, position = 'afterbegin', clear = false) {
-  if (clear == true) {
-    parentElement.innerHTML = "";
-  }
-  const htmlStrings = list.map(templateFn);
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
 }
