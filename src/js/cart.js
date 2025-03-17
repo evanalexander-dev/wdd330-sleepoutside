@@ -3,7 +3,24 @@ import { getLocalStorage, renderCartIcon } from "./utils.mjs";
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+
+  // Check if cart is empty
+  if (cartItems.length !== 0) {
+
+    const total = cartItems.reduce(reducerFunction, 0);
+
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+    document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
+  }
+  else {
+    document.querySelector(".product-list").innerHTML = `<p>Cart is currently empty. Add products</>`;
+
+  }
+
+}
+
+function reducerFunction(total, item) {
+  return total + item.FinalPrice;
 }
 
 function cartItemTemplate(item) {
