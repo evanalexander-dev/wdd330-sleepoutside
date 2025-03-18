@@ -19,6 +19,7 @@ function renderCartContents() {
     });
   } else {
     document.querySelector(".product-list").innerHTML = `<p>Cart is currently empty. Add products</p>`;
+    document.querySelector(".cart-total").textContent = "";
   }
 }
 
