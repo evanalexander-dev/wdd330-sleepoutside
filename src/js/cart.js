@@ -4,7 +4,7 @@ function renderCartContents() {
   const cartItems = getLocalStorage("so-cart");
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector(".product-list").innerHTML = htmlItems.join("");
-
+  //Fixing delete button not working
   const deleteButtons = document.querySelectorAll(".close-btn");
   deleteButtons.forEach((button) => {
     button.addEventListener("click", function() {
