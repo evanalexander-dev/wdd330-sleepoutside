@@ -48,9 +48,7 @@ function cartItemTemplate(item) {
 }
 
 renderCartIcon();
-
 renderCartContents();
-
 renderCartCount();
 
 function deleteItem(id) {
@@ -61,13 +59,10 @@ function deleteItem(id) {
 
     if (itemIndex !== -1) {
       cartItems.splice(itemIndex, 1);
-
-      localStorage.clear();
-
       localStorage.setItem("so-cart", JSON.stringify(cartItems));
 
+      renderCartIcon();
       renderCartContents();
-
       renderCartCount();
     }
   }
