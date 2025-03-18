@@ -37,8 +37,6 @@ renderCartIcon();
 
 renderCartContents();
 
-//renderCartCount();
-
 function deleteItem(id) {
   var cartItems = getLocalStorage("so-cart");
 
