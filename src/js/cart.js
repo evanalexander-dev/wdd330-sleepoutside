@@ -1,17 +1,16 @@
 import { getLocalStorage, renderCartIcon } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart") || [];
+  const cartItems = getLocalStorage("so-cart");
+  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+  document.querySelector(".product-list").innerHTML = htmlItems.join("");
 
-    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    document.querySelector(".product-list").innerHTML = htmlItems.join("");
-  
-    const deleteButtons = document.querySelectorAll(".close-btn");
-    deleteButtons.forEach((button) => {
-      button.addEventListener("click", function() {
-        deleteItem(button.getAttribute("data-id"));
-      });
+  const deleteButtons = document.querySelectorAll(".close-btn");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", function() {
+      deleteItem(button.getAttribute("data-id"));
     });
+  });
 }
 
 function cartItemTemplate(item) {
@@ -38,7 +37,7 @@ renderCartIcon();
 
 renderCartContents();
 
-renderCartCount();
+//renderCartCount();
 
 function deleteItem(id) {
   var cartItems = getLocalStorage("so-cart");
@@ -55,7 +54,7 @@ function deleteItem(id) {
 
       renderCartContents();
 
-      renderCartCount();
+      //renderCartCount();
     }
   }
 }
