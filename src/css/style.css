@@ -197,6 +197,20 @@ button {
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 2px;
+  font-size: 10px;
+  font-weight: bold;
+  border: 1px solid black;
+  background: black;
+  color: white;
+  
 }
 
 .cart-card__image {

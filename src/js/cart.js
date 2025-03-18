@@ -1,4 +1,4 @@
-import { getLocalStorage, renderCartIcon } from "./utils.mjs";
+import { getLocalStorage, renderCartIcon, handleCartChange } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -6,17 +6,21 @@ function renderCartContents() {
 
   // Check if cart is empty
   if (cartItems.length !== 0) {
-
     const total = cartItems.reduce(reducerFunction, 0);
 
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
     document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
+    
+    const deleteButtons = document.querySelectorAll(".close-btn");
+    deleteButtons.forEach((button) => {
+      button.addEventListener("click", function() {
+        deleteItem(button.getAttribute("data-id"));
+      });
+    });
+  } else {
+    document.querySelector(".product-list").innerHTML = `<p>Cart is currently empty. Add products</p>`;
+    document.querySelector(".cart-total").textContent = "";
   }
-  else {
-    document.querySelector(".product-list").innerHTML = `<p>Cart is currently empty. Add products</>`;
-
-  }
-
 }
 
 function reducerFunction(total, item) {
@@ -25,6 +29,7 @@ function reducerFunction(total, item) {
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
+  <button class="close-btn" data-id="${item.Id}">X</button>
   <a href="#" class="cart-card__image">
     <img
       src="${item.Image}"
@@ -44,3 +49,21 @@ function cartItemTemplate(item) {
 
 renderCartIcon();
 renderCartContents();
+renderCartCount();
+
+function deleteItem(id) {
+  var cartItems = getLocalStorage("so-cart");
+
+  if (cartItems) {
+    const itemIndex = cartItems.findIndex(item => item.Id === id);
+
+    if (itemIndex !== -1) {
+      cartItems.splice(itemIndex, 1);
+      localStorage.setItem("so-cart", JSON.stringify(cartItems));
+
+      handleCartChange();
+      renderCartContents();
+      renderCartCount();
+    }
+  }
+}
