@@ -1,4 +1,4 @@
-import { getLocalStorage, renderCartIcon } from "./utils.mjs";
+import { getLocalStorage, renderCartIcon, handleCartChange } from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -61,7 +61,7 @@ function deleteItem(id) {
       cartItems.splice(itemIndex, 1);
       localStorage.setItem("so-cart", JSON.stringify(cartItems));
 
-      renderCartIcon();
+      handleCartChange();
       renderCartContents();
       renderCartCount();
     }
