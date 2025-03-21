@@ -28,22 +28,6 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
-export function renderCartIcon() {
-  const cart = document.querySelector(".cart");
-
-  const cartLink = document.createElement("a");
-  cartLink.href = `${location.origin}/cart/index.html`;
-
-  cartLink.innerHTML = `
-    <span id="cart-quantity-items"></span>
-    <img src="/images/cart-icon.svg" alt="Cart Icon">
-  `;
-
-  handleCartChange(cartLink.querySelector("#cart-quantity-items"));
-
-  cart.appendChild(cartLink);
-}
-
 export function handleCartChange(cartQuantityElement = document.getElementById("cart-quantity-items")) {
   const cartItems = getLocalStorage("so-cart");
   if (cartItems) {
@@ -60,4 +44,43 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
 
   const htmlCards = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlCards.join(""));
+}
+
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if(callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const res = await fetch(path);
+  const template = await res.text();
+  return template;
+}
+
+export async function loadHeaderFooter() {
+  const headerElement = document.querySelector("#main-header");
+  const headerPartial = await loadTemplate("../partials/header.html");
+  renderWithTemplate(headerPartial, headerElement, undefined, renderCartIcon);
+
+  const footerElement = document.querySelector("#main-footer");
+  const footerPartial = await loadTemplate("../partials/footer.html");
+  renderWithTemplate(footerPartial, footerElement);
+}
+
+function renderCartIcon() {
+  const cart = document.querySelector(".cart");
+
+  const cartLink = document.createElement("a");
+  cartLink.href = `${location.origin}/cart/index.html`;
+
+  cartLink.innerHTML = `
+    <span id="cart-quantity-items"></span>
+    <img src="/images/cart-icon.svg" alt="Cart Icon">
+  `;
+
+  handleCartChange(cartLink.querySelector("#cart-quantity-items"));
+
+  cart.appendChild(cartLink);
 }
