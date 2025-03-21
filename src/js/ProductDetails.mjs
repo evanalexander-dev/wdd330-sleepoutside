@@ -20,11 +20,13 @@ export default class ProductDetails {
     const productExists = cartContent.find(item => item.Id === this.productId);
     // Check if product exist
     if (productExists) {
-      // Increase the qty by 1
-      productExists.qty += 1;
+      // Increase the Qty by 1
+      productExists.Qty += 1;
+      const priceByQty = productExists.Qty * productExists.ListPrice
+      productExists.FinalPrice = priceByQty.toFixed(2);
     } else {
-      // add qty attribute to the product array 
-      this.product.qty = 1;
+      // add Qty attribute to the product array 
+      this.product.Qty = 1;
       cartContent.push(this.product);
     }
     setLocalStorage("so-cart", cartContent);
