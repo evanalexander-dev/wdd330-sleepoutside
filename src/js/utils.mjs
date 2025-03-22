@@ -61,11 +61,11 @@ export async function loadTemplate(path) {
 
 export async function loadHeaderFooter() {
   const headerElement = document.querySelector("#main-header");
-  const headerPartial = await loadTemplate("../partials/header.html");
+  const headerPartial = await loadTemplate("../public/partials/header.html");
   renderWithTemplate(headerPartial, headerElement, undefined, renderCartIcon);
 
   const footerElement = document.querySelector("#main-footer");
-  const footerPartial = await loadTemplate("../partials/footer.html");
+  const footerPartial = await loadTemplate("../public/partials/footer.html");
   renderWithTemplate(footerPartial, footerElement);
 }
 

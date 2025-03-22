@@ -4,8 +4,9 @@ import ProductDetails from "./ProductDetails.mjs";
 
 loadHeaderFooter();
 
-const dataSource = new ProductData("tents");
+const dataSource = new ProductData("category");
 const productId = getParam("product");
 
 const product = new ProductDetails(productId, dataSource);
 product.init();
+
