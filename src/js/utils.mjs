@@ -38,6 +38,7 @@ export function handleCartChange(cartQuantityElement = document.getElementById("
       cartQuantityElement.classList.add("active");
     } else {
       cartQuantityElement.classList.remove("active");
+      cartQuantityElement.innerText = "";
     }
 
     // Trigger the anitmation
