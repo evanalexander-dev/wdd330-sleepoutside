@@ -55,7 +55,7 @@ function cartItemTemplate(item) {
 
 loadHeaderFooter();
 renderCartContents();
-renderCartCount();
+// renderCartCount();
 
 function deleteItem(id) {
   var cartItems = getLocalStorage("so-cart");
@@ -69,7 +69,7 @@ function deleteItem(id) {
 
       handleCartChange();
       renderCartContents();
-      renderCartCount();
+      // renderCartCount();
     }
   }
 }
