@@ -33,7 +33,15 @@ export function handleCartChange(cartQuantityElement = document.getElementById("
   if (cartItems) {
     const cartQuantity = cartItems.length;
     cartQuantityElement.innerText = cartQuantity;
-    cartQuantityElement.classList.add("active");
+
+    if (cartQuantity > 0) {
+      cartQuantityElement.classList.add("active");
+    } else {
+      cartQuantityElement.classList.remove("active");
+    }
+
+    // Trigger the anitmation
+    animateCartIcon();
   }
 }
 
@@ -77,10 +85,28 @@ function renderCartIcon() {
 
   cartLink.innerHTML = `
     <span id="cart-quantity-items"></span>
-    <img src="/images/cart-icon.svg" alt="Cart Icon">
+    <img src="/images/cart-icon.svg" alt="Cart Icon" id="cart-icon" />
   `;
 
   handleCartChange(cartLink.querySelector("#cart-quantity-items"));
 
   cart.appendChild(cartLink);
+}
+
+function animateCartIcon() {
+  const cartIcon = document.querySelector("#cart-icon");
+
+  if (cartIcon) {
+    // Remove the class before re-adding it to restart the animation
+    cartIcon.classList.remove("cart-icon-shake");
+
+    // Re-add the animation class to restart the animation
+    void cartIcon.offsetWidth; // Trigger reflow to ensure animation restarts
+    cartIcon.classList.add("cart-icon-shake");
+    
+    // Remove the class after the animation ends
+    cartIcon.addEventListener("animationend", () => {
+      cartIcon.classList.remove("cart-icon-shake");
+    });
+  }
 }
