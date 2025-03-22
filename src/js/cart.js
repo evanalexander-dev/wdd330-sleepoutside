@@ -3,14 +3,6 @@ import { getLocalStorage, handleCartChange, loadHeaderFooter } from "./utils.mjs
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-<<<<<<< HEAD
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
-
-  if (cartItems && cartItems.length > 0) {
-    const total = cartItems.reduce((acc, item) => acc + item.FinalPrice, 0);
-    document.getElementById("cart-total").textContent = `Total: $${total}`;
-  }
-=======
 
   // Check if cart is empty
   if (cartItems.length !== 0) {
@@ -33,7 +25,6 @@ function renderCartContents() {
 
 function reducerFunction(total, item) {
   return total + item.FinalPrice;
->>>>>>> origin/main
 }
 
 function cartItemTemplate(item) {

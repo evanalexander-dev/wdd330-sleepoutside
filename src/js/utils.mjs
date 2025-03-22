@@ -28,15 +28,6 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 
-<<<<<<< HEAD
-export function renderListWithTemplate(list, template, element, position='afterbegin', clear=false) {
-  if(clear){
-    element.innerHTML = "";
-  }
-  const htmlStrings = list.map(template);
-  element.insertAdjacentHTML(position, htmlStrings.join(''));
-}
-=======
 export function handleCartChange(cartQuantityElement = document.getElementById("cart-quantity-items")) {
   const cartItems = getLocalStorage("so-cart");
   if (cartItems) {
@@ -70,11 +61,11 @@ export async function loadTemplate(path) {
 
 export async function loadHeaderFooter() {
   const headerElement = document.querySelector("#main-header");
-  const headerPartial = await loadTemplate("../partials/header.html");
+  const headerPartial = await loadTemplate("../public/partials/header.html");
   renderWithTemplate(headerPartial, headerElement, undefined, renderCartIcon);
 
   const footerElement = document.querySelector("#main-footer");
-  const footerPartial = await loadTemplate("../partials/footer.html");
+  const footerPartial = await loadTemplate("../public/partials/footer.html");
   renderWithTemplate(footerPartial, footerElement);
 }
 
@@ -93,4 +84,3 @@ function renderCartIcon() {
 
   cart.appendChild(cartLink);
 }
->>>>>>> origin/main
