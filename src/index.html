@@ -11,11 +11,15 @@
     <header class="divider" id="main-header"></header>
     <main class="divider">
       <div class="hero">
-        <img
+        <!-- <img
           src="/images/banner-sm.jpg"
           srcset="images/banner-sm.jpg 500w, images/banner.jpg"
           alt="image of a high mountain lake"
-        />
+        /> -->
+        <picture>
+          <source media="(max-width: 600px)" srcset="/images/banner-sm.jpg" />
+          <img src="/images/banner.jpg" alt="image of a high mountain lake" />
+        </picture>        
         <div class="logo logo--square">
           <img src="/images/noun_Tent_2517.svg" alt="tent image for logo" />
           <div>Sleep<span class="highlight">Outside</span></div>
@@ -31,9 +35,37 @@
         </p>
       </section>
       <section class="products">
+        <ul class="product-categories">
+          <li>
+            <a href="product_listing/?category=tents">
+              <img src="/images/catagory_icons/category-tents.svg" alt="Tents" />
+              <h4>Tents</h4>
+            </a>
+          </li>
+          <li>
+            <a href="product_listing/?category=backpacks">
+              <img src="/images/catagory_icons/category-backpacks.svg" alt="Backpacks" />
+              <h4>Backpacks</h4>
+            </a>
+          </li>
+          <li>
+            <a href="product_listing/?category=sleeping-bags">
+              <img src="/images/catagory_icons/category-sleepingbags.svg" alt="Sleeping Bags" />
+              <h4>Sleeping Bags</h4>
+            </a>
+          </li>
+          <li>
+            <a href="product_listing/?category=hammocks">
+              <img src="/images/catagory_icons/category-hammocks.svg" alt="Hammocks" />
+              <h4>Hammocks</h4>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <!-- <section class="products">
         <h2>Top Products</h2>
         <ul class="product-list"></ul>
-      </section>
+      </section> -->
     </main>
     <footer id="main-footer"></footer>
   </body>
