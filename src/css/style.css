@@ -76,6 +76,33 @@ header {
 .logo--square > div {
   margin-top: -1.7em;
 }
+
+.product-categories {
+  margin: 3rem auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.product-categories a,
+.product-categories a:visited {
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+  text-align: center;
+}
+
+.product-categories a:hover {
+  scale: 1.02;
+}
+
+.product-categories p {
+  margin: 0.5rem 0;
+}
+
+.product-categories img {
+  max-width: 80px;
+}
+
 /* utility classes */
 .highlight {
   color: var(--tertiary-color);
@@ -210,7 +237,6 @@ button {
   border: 1px solid black;
   background: black;
   color: white;
-  
 }
 
 .cart-card__image {

@@ -1,4 +1,8 @@
-import { getLocalStorage, handleCartChange, loadHeaderFooter } from "./utils.mjs";
+import {
+  getLocalStorage,
+  handleCartChange,
+  loadHeaderFooter,
+} from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -9,16 +13,18 @@ function renderCartContents() {
     const total = cartItems.reduce(reducerFunction, 0);
 
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
-    document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
-    
+    document.querySelector(".cart-total").textContent =
+      `Total: $${total.toFixed(2)}`;
+
     const deleteButtons = document.querySelectorAll(".close-btn");
     deleteButtons.forEach((button) => {
-      button.addEventListener("click", function() {
+      button.addEventListener("click", function () {
         deleteItem(button.getAttribute("data-id"));
       });
     });
   } else {
-    document.querySelector(".product-list").innerHTML = `<p>Cart is currently empty. Add products</p>`;
+    document.querySelector(".product-list").innerHTML =
+      `<p>Cart is currently empty. Add products</p>`;
     document.querySelector(".cart-total").textContent = "";
   }
 }
@@ -32,7 +38,7 @@ function cartItemTemplate(item) {
   <button class="close-btn" data-id="${item.Id}">X</button>
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images?.PrimarySmall ?? item.Image}"
       alt="${item.Name}"
     />
   </a>
@@ -55,7 +61,7 @@ function deleteItem(id) {
   var cartItems = getLocalStorage("so-cart");
 
   if (cartItems) {
-    const itemIndex = cartItems.findIndex(item => item.Id === id);
+    const itemIndex = cartItems.findIndex((item) => item.Id === id);
 
     if (itemIndex !== -1) {
       cartItems.splice(itemIndex, 1);

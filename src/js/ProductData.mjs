@@ -1,3 +1,5 @@
+const baseURL = import.meta.env.VITE_SERVER_URL;
+
 function convertToJson(res) {
   if (res.ok) {
     return res.json();
@@ -9,7 +11,7 @@ function convertToJson(res) {
 export default class ProductData {
   constructor(category) {
     this.category = category;
-    this.path = `../json/${this.category}.json`;
+    this.path = `${baseURL}json/${this.category}.json`;
   }
   getData() {
     return fetch(this.path)
@@ -18,6 +20,6 @@ export default class ProductData {
   }
   async findProductById(id) {
     const products = await this.getData();
-    return products.find((item) => item.Id === id);
+    return products.Result.find((item) => item.Id === id);
   }
 }
