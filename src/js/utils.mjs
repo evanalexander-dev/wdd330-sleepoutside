@@ -41,14 +41,13 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   if (clear) {
     parentElement.innerHTML = "";
   }
-
   const htmlCards = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlCards.join(""));
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
-  if(callback) {
+  if (callback) {
     callback(data);
   }
 }
@@ -83,4 +82,9 @@ function renderCartIcon() {
   handleCartChange(cartLink.querySelector("#cart-quantity-items"));
 
   cart.appendChild(cartLink);
+}
+
+
+export function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
