@@ -157,6 +157,22 @@ button {
   text-decoration: none;
   color: var(--dark-grey);
 }
+.product-categories {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+}
+.product-categories li a {
+  text-align: center;
+  text-decoration: none;
+  color: var(--dark-grey);
+}
+.product-categories li a img {
+  height: 7.5rem;
+  width: auto;
+}
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
