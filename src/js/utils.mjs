@@ -41,14 +41,14 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   if (clear) {
     parentElement.innerHTML = "";
   }
-  
+
   const htmlCards = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlCards.join(""));
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
-  if(callback) {
+  if (callback) {
     callback(data);
   }
 }
@@ -83,4 +83,20 @@ function renderCartIcon() {
   handleCartChange(cartLink.querySelector("#cart-quantity-items"));
 
   cart.appendChild(cartLink);
+}
+
+export function calculateDiscount(finalPrice, suggestedRetailPrice) {
+  const hasDiscount = finalPrice < suggestedRetailPrice;
+  const discountAmount = hasDiscount ? (suggestedRetailPrice - finalPrice).toFixed(2) : 0;
+  const discountPercent = hasDiscount ? Math.round((discountAmount / suggestedRetailPrice) * 100) : 0;
+
+  return { hasDiscount, discountAmount, discountPercent };
+}
+
+export function generateDiscountTag(finalPrice, suggestedRetailPrice) {
+  const { hasDiscount, discountAmount, discountPercent } = calculateDiscount(finalPrice, suggestedRetailPrice);
+
+  return hasDiscount
+    ? `<p class="product__discount">Save $${discountAmount} (${discountPercent}% OFF)</p>`
+    : "";
 }
