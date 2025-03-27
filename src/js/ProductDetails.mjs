@@ -21,12 +21,10 @@ export default class ProductDetails {
     // Check if product exist
     if (productExists) {
       // Increase the Qty by 1
-      productExists.Qty += 1;
-      const priceByQty = productExists.Qty * productExists.ListPrice
-      productExists.FinalPrice = priceByQty.toFixed(2);
+      productExists.Quantity += 1;
     } else {
       // add Qty attribute to the product array 
-      this.product.Qty = 1;
+      this.product.Quantity = 1;
       cartContent.push(this.product);
     }
     setLocalStorage("so-cart", cartContent);
