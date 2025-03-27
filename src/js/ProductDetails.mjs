@@ -16,7 +16,17 @@ export default class ProductDetails {
   }
   addToCart() {
     const cartContent = getLocalStorage("so-cart") || [];
-    cartContent.push(this.product);
+    // find product in cart using find()
+    const productExists = cartContent.find(item => item.Id === this.productId);
+    // Check if product exist
+    if (productExists) {
+      // Increase the Qty by 1
+      productExists.Quantity += 1;
+    } else {
+      // add Qty attribute to the product array 
+      this.product.Quantity = 1;
+      cartContent.push(this.product);
+    }
     setLocalStorage("so-cart", cartContent);
     handleCartChange();
   }
