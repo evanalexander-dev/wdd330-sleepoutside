@@ -1,4 +1,4 @@
-import { getLocalStorage, handleCartChange, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, handleCartChange, setLocalStorage, generateDiscountTag } from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -34,14 +34,7 @@ export default class ProductDetails {
     const title = document.querySelector("title");
     title.innerText = `Sleep Outside | ${this.product.Name}`;
 
-    const hasDiscount = this.product.FinalPrice < this.product.SuggestedRetailPrice;
-
-    const discountAmount = (this.product.SuggestedRetailPrice - this.product.FinalPrice).toFixed(2);
-    const discountPercent = Math.round((discountAmount / this.product.SuggestedRetailPrice) * 100);
-
-    const discountTag = hasDiscount
-      ? `<p class="product__discount">Save $${discountAmount} (${discountPercent}% OFF)</p>`
-      : "";
+    const discountTag = generateDiscountTag(this.product.FinalPrice, this.product.SuggestedRetailPrice);
 
     const element = document.querySelector(selector);
     element.insertAdjacentHTML(
