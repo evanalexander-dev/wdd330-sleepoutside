@@ -9,7 +9,7 @@ function renderCartContents() {
     const total = cartItems.reduce(reducerFunction, 0);
 
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
-    document.querySelector(".cart-total").textContent = `Total: $${total}`;
+    document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
 
     const deleteButtons = document.querySelectorAll(".close-btn");
     deleteButtons.forEach((button) => {
