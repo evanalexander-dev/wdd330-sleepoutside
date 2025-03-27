@@ -73,7 +73,6 @@ function updateQuantity(id, newQuantity) {
 
       handleCartChange();
       renderCartContents();
-      renderCartCount();
     }
   }
 }
@@ -90,16 +89,9 @@ function deleteItem(id) {
 
       handleCartChange();
       renderCartContents();
-      renderCartCount();
     }
   }
-}
-function renderCartCount() {
-  const cartItems = getLocalStorage("so-cart") || [];
-  const itemCount = cartItems.reduce((total, item) => total + item.Quantity, 0); // Sum up the quantities of all items
-  document.querySelector(".cart-count").textContent = `Items: ${itemCount}`;
 }
 
 loadHeaderFooter();
 renderCartContents();
-renderCartCount();

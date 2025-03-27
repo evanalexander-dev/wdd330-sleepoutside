@@ -31,7 +31,7 @@ export function getParam(param) {
 export function handleCartChange(cartQuantityElement = document.getElementById("cart-quantity-items")) {
   const cartItems = getLocalStorage("so-cart");
   if (cartItems) {
-    const cartQuantity = cartItems.reduce((acc, item) => acc + item.Quantity);
+    const cartQuantity = cartItems.reduce((acc, item) => acc + item.Quantity, 0);
     cartQuantityElement.innerText = cartQuantity;
     cartQuantityElement.classList.add("active");
   }
