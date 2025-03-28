@@ -8,7 +8,7 @@
 
     <title>Sleep Outside | Checkout</title>
 
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
 
     <script src="../js/checkout.js" type="module"></script>
   </head>
@@ -20,6 +20,66 @@
       <section class="products">
         <h2>Review & Place your Order</h2>
       </section>
+
+      <div>
+        <form id="checkout-form">
+          <label for="first-name">First Name</label>
+          <input required type="text" name="first-name" id="first-name" />
+
+          <label for="last-name">Last Name</label>
+          <input required type="text" name="last-name" id="last-name" />
+
+          <label for="street-address">Street Address</label>
+          <input
+            required
+            type="text"
+            name="street-address"
+            id="street-address"
+          />
+
+          <label for="city">City</label>
+          <input required type="text" name="city" id="city" />
+
+          <label for="state">State</label>
+          <input required type="text" name="state" id="state" />
+
+          <label for="zip-code">Zip Code</label>
+          <input required type="number" name="zip-code" id="zip-code" />
+
+          <label for="credit-card-number">Credit Card Number</label>
+          <input
+            required
+            type="number"
+            name="credit-card-number"
+            id="credit-card-number"
+          />
+
+          <label for="expiration-date">Expiration Date</label>
+          <input
+            required
+            type="text"
+            name="expiration-date"
+            id="expiration-date"
+          />
+
+          <label for="security Code">Security Code</label>
+          <input
+            required
+            type="number"
+            name="security Code"
+            id="security Code"
+          />
+
+          <button type="submit">Checkout</button>
+        </form>
+
+        <div id="order-summary">
+          <p>Subtotal: <span id="subtotal"></span></p>
+          <p>Tax: <span id="tax"></span></p>
+          <p>Shipping Estimate: <span id="shipping-estimate"></span></p>
+          <p>Order Total: <span id="order-total"></span></p>
+        </div>
+      </div>
     </main>
 
     <footer id="main-footer"></footer>

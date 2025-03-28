@@ -226,7 +226,6 @@ button {
   border: 1px solid black;
   background: black;
   color: white;
-  
 }
 
 .cart-card__image {
@@ -268,6 +267,13 @@ button {
   display: inline-block;
 }
 
+/* Checkout styles */
+#checkout-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /*Sort controls*/
 .sort-controls {
   display: flex;
@@ -283,8 +289,6 @@ button {
   padding: 5px 10px;
   font-size: 1rem;
 }
-
-
 
 @media screen and (min-width: 500px) {
   body {

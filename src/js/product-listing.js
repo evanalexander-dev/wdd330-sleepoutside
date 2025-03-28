@@ -6,9 +6,11 @@ loadHeaderFooter();
 
 const category = getParam("category");
 
-document.querySelector("#top-products").innerHTML += `: ${category.replace("-", " ").replace(
+document.querySelector("#top-products").innerHTML += `: ${category
+  .replace("-", " ")
+  .replace(
     /\w\S*/g,
-    text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+    (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
   )}`;
 
 const dataSource = new ProductData();
