@@ -1,4 +1,4 @@
-import { getLocalStorage, handleCartChange, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, handleCartChange, setLocalStorage, generateDiscountTag } from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -18,7 +18,17 @@ export default class ProductDetails {
   }
   addToCart() {
     const cartContent = getLocalStorage("so-cart") || [];
-    cartContent.push(this.product);
+    // find product in cart using find()
+    const productExists = cartContent.find(item => item.Id === this.productId);
+    // Check if product exist
+    if (productExists) {
+      // Increase the Qty by 1
+      productExists.Quantity += 1;
+    } else {
+      // add Qty attribute to the product array 
+      this.product.Quantity = 1;
+      cartContent.push(this.product);
+    }
     setLocalStorage("so-cart", cartContent);
     handleCartChange();
   }
@@ -26,14 +36,7 @@ export default class ProductDetails {
     const title = document.querySelector("title");
     title.innerText = `Sleep Outside | ${this.product.Name}`;
 
-    const hasDiscount = this.product.FinalPrice < this.product.SuggestedRetailPrice;
-
-    const discountAmount = (this.product.SuggestedRetailPrice - this.product.FinalPrice).toFixed(2);
-    const discountPercent = Math.round((discountAmount / this.product.SuggestedRetailPrice) * 100);
-
-    const discountTag = hasDiscount
-      ? `<p class="product__discount">Save $${discountAmount} (${discountPercent}% OFF)</p>`
-      : "";
+    const discountTag = generateDiscountTag(this.product.FinalPrice, this.product.SuggestedRetailPrice);
 
     const element = document.querySelector(selector);
     element.insertAdjacentHTML(

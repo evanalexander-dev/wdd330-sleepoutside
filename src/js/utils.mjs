@@ -31,7 +31,7 @@ export function getParam(param) {
 export function handleCartChange(cartQuantityElement = document.getElementById("cart-quantity-items")) {
   const cartItems = getLocalStorage("so-cart");
   if (cartItems) {
-    const cartQuantity = cartItems.length;
+    const cartQuantity = cartItems.reduce((acc, item) => acc + item.Quantity, 0);
     cartQuantityElement.innerText = cartQuantity;
 
     if (cartQuantity > 0) {
@@ -50,14 +50,14 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   if (clear) {
     parentElement.innerHTML = "";
   }
-  
+
   const htmlCards = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlCards.join(""));
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
   parentElement.innerHTML = template;
-  if(callback) {
+  if (callback) {
     callback(data);
   }
 }
@@ -94,6 +94,7 @@ function renderCartIcon() {
   cart.appendChild(cartLink);
 }
 
+<<<<<<< HEAD
 function animateCartIcon() {
   const cartIcon = document.querySelector("#cart-icon");
 
@@ -111,3 +112,24 @@ function animateCartIcon() {
     });
   }
 }
+=======
+export function calculateDiscount(finalPrice, suggestedRetailPrice) {
+  const hasDiscount = finalPrice < suggestedRetailPrice;
+  const discountAmount = hasDiscount ? (suggestedRetailPrice - finalPrice).toFixed(2) : 0;
+  const discountPercent = hasDiscount ? Math.round((discountAmount / suggestedRetailPrice) * 100) : 0;
+
+  return { hasDiscount, discountAmount, discountPercent };
+}
+
+export function generateDiscountTag(finalPrice, suggestedRetailPrice) {
+  const { hasDiscount, discountAmount, discountPercent } = calculateDiscount(finalPrice, suggestedRetailPrice);
+
+  return hasDiscount
+    ? `<p class="product__discount">Save $${discountAmount} (${discountPercent}% OFF)</p>`
+    : "";
+}
+
+export function cartTotalReducerFunction(total, item) {
+  return total + (item.FinalPrice * item.Quantity);
+}
+>>>>>>> d145edbf45a967c6b0fa5a8bae1adc27e727121b

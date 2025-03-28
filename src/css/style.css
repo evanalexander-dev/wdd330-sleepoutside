@@ -203,6 +203,22 @@ button {
   text-decoration: none;
   color: var(--dark-grey);
 }
+.product-categories {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+}
+.product-categories li a {
+  text-align: center;
+  text-decoration: none;
+  color: var(--dark-grey);
+}
+.product-categories li a img {
+  height: 7.5rem;
+  width: auto;
+}
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;
@@ -297,6 +313,29 @@ button {
   display: inline-block;
 }
 
+/* Checkout styles */
+#checkout-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*Sort controls*/
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.sort-controls label {
+  font-weight: bold;
+}
+.sort-controls select {
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -316,6 +355,7 @@ footer {
   padding: 1em;
 }
 
+<<<<<<< HEAD
 /* Index Menu Logos Div */
 .menu {
   display: flex;
@@ -359,4 +399,80 @@ footer {
   height: auto;
   padding: 0;
   margin: 0 auto;
+=======
+/* This will style the quantity input inside the cart items */
+.cart-card__quantity input[type="number"] {
+  width: 50px; /* Adjust the width to make it smaller */
+  height: 30px; /* Adjust the height to make it smaller */
+  padding: 5px; /* Add padding to ensure the number fits */
+  font-size: 14px; /* Adjust the font size to make it fit better */
+  text-align: center; /* Center the number inside the input */
+}
+
+/* Checkout page styles */
+.checkout {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.checkout-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#checkout-form {
+  flex: 1 1 60%;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#checkout-form div {
+  display: flex;
+  flex-direction: column;
+}
+
+#checkout-form label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+#checkout-form .input-field {
+  padding: 0.5rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  font-size: var(--font-base);
+}
+
+#checkout-form .button {
+  margin-top: 1rem;
+  align-self: center;
+}
+
+.order-summary {
+  flex: 1 1 35%;
+  padding: 1rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary p {
+  font-size: var(--font-base);
+  margin: 0.5rem 0;
+}
+
+.order-summary .highlight {
+  font-weight: bold;
+  color: var(--primary-color);
+>>>>>>> d145edbf45a967c6b0fa5a8bae1adc27e727121b
 }
