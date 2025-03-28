@@ -39,7 +39,8 @@ function renderCartContents() {
       window.location.replace("/checkout/index.html");
     });
 
-    document.querySelector(".products").appendChild(checkoutButton);
+    document.querySelector(".cart-button-wrapper").innerHTML = "";
+    document.querySelector(".cart-button-wrapper").appendChild(checkoutButton);
   } else {
     document.querySelector(".product-list").innerHTML =
       `<p>Cart is currently empty. Add products</p>`;
