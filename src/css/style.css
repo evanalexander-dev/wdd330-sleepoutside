@@ -268,6 +268,24 @@ button {
   display: inline-block;
 }
 
+/*Sort controls*/
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.sort-controls label {
+  font-weight: bold;
+}
+.sort-controls select {
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+
+
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

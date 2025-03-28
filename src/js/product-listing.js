@@ -4,7 +4,7 @@ import ProductList from "./ProductList.mjs";
 
 loadHeaderFooter();
 
-const category = getParam('category');
+const category = getParam("category");
 
 document.querySelector("#top-products").innerHTML += `: ${category.replace("-", " ").replace(
     /\w\S*/g,
