@@ -43,40 +43,40 @@ export default class CheckoutProcess {
   }
 
   renderSubtotal() {
-    document.getElementById('subtotal').innerText = `$${this.subtotal}`;
+    document.getElementById('subtotal').innerText = `$${this.subtotal.toFixed(2)}`;
   }
 
   calculateAndRenderSummary() {
     this.tax = this.calculateTax();
     this.shipping = this.calculateShipping();
-    this.orderTotal = this.calculateOrderTotal(this.tax, this.shipping);
+    this.orderTotal = this.calculateOrderTotal();
 
-    document.getElementById('tax').innerText = `$${this.tax}`;
-    document.getElementById('shipping-estimate').innerText = `$${this.shipping}`;
-    document.getElementById('order-total').innerText = `$${this.orderTotal}`;
+    document.getElementById('tax').innerText = `$${this.tax.toFixed(2)}`;
+    document.getElementById('shipping-estimate').innerText = `$${this.shipping.toFixed(2)}`;
+    document.getElementById('order-total').innerText = `$${this.orderTotal.toFixed(2)}`;
   }
 
   calculateSubtotal() {
-    return this.cartItems.reduce(cartTotalReducerFunction, 0).toFixed(2);
+    return parseFloat(this.cartItems.reduce(cartTotalReducerFunction, 0).toFixed(2));
   }
 
   calculateTax() {
     const taxRate = 0.06;
-    return (this.subtotal * taxRate).toFixed(2);
+    return parseFloat((this.subtotal * taxRate).toFixed(2));
   }
 
   calculateShipping() {
     const cartItemsAmount = this.cartItems.length;
-    let shipping = 10; // Base shipping cost
+    let shipping = 10;
     if (cartItemsAmount > 1) {
       shipping += 2 * (cartItemsAmount - 1);
     }
-    return shipping.toFixed(2);
+    return parseFloat(shipping.toFixed(2));
   }
 
-  calculateOrderTotal(tax, shipping) {
-    const orderTotal = this.subtotal + tax + shipping;
-    return Number.parseFloat(orderTotal).toFixed(2);
+  calculateOrderTotal() {
+    const orderTotal = this.subtotal + this.tax + this.shipping;
+    return parseFloat(orderTotal.toFixed(2));
   }
 
   async checkout() {
