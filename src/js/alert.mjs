@@ -32,3 +32,40 @@ function createAlerts(alerts) {
     mainElement.prepend(alertSection);
   }
 }
+
+function showRegistrationModal() {
+  console.log("Checking if the modal should be displayed...");
+
+  if (!localStorage.getItem('hasSeenModal')) {
+    console.log("Displaying the modal...");
+
+    const modal = document.createElement('div');
+    modal.className = 'registration-modal';
+
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+
+    const title = document.createElement('h2');
+    title.textContent = 'Join & Win!';
+
+    const message = document.createElement('p');
+    message.textContent =
+      'Register today and enter our giveaway for a chance to win a special prize!';
+
+    const closeButton = document.createElement('button');
+    closeButton.textContent = 'Got it!';
+    closeButton.onclick = () => {
+      modal.style.display = 'none';
+      localStorage.setItem('hasSeenModal', 'true'); // Prevents modal from appearing again
+      console.log("Modal closed and saved to localStorage.");
+    };
+
+    modalContent.appendChild(title);
+    modalContent.appendChild(message);
+    modalContent.appendChild(closeButton);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+  } else {
+    console.log("User has already seen the modal.");
+  }
+}
