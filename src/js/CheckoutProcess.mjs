@@ -66,7 +66,7 @@ export default class CheckoutProcess {
   }
 
   calculateShipping() {
-    const cartItemsAmount = this.cartItems.length;
+    const cartItemsAmount = this.cartItems.reduce((acc, item) => acc + item.Quantity);
     let shipping = 10;
     if (cartItemsAmount > 1) {
       shipping += 2 * (cartItemsAmount - 1);
