@@ -1,5 +1,5 @@
 import { loadHeaderFooter, getParam } from "./utils.mjs";
-import ProductData from "./ProductData.mjs";
+import ExternalServices from "./ExternalServices.mjs";
 import ProductList from "./ProductList.mjs";
 
 loadHeaderFooter();
@@ -13,7 +13,7 @@ document.querySelector("#top-products").innerHTML += `: ${category
     (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
   )}`;
 
-const dataSource = new ProductData();
+const dataSource = new ExternalServices();
 const element = document.querySelector(".product-list");
 const productList = new ProductList(category, dataSource, element);
 productList.init();
