@@ -226,7 +226,6 @@ button {
   border: 1px solid black;
   background: black;
   color: white;
-  
 }
 
 .cart-card__image {
@@ -268,6 +267,13 @@ button {
   display: inline-block;
 }
 
+/* Checkout styles */
+#checkout-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /*Sort controls*/
 .sort-controls {
   display: flex;
@@ -283,8 +289,6 @@ button {
   padding: 5px 10px;
   font-size: 1rem;
 }
-
-
 
 @media screen and (min-width: 500px) {
   body {
@@ -312,4 +316,71 @@ footer {
   padding: 5px; /* Add padding to ensure the number fits */
   font-size: 14px; /* Adjust the font size to make it fit better */
   text-align: center; /* Center the number inside the input */
+}
+
+/* Checkout page styles */
+.checkout {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.checkout-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#checkout-form {
+  flex: 1 1 60%;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#checkout-form div {
+  display: flex;
+  flex-direction: column;
+}
+
+#checkout-form label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+#checkout-form .input-field {
+  padding: 0.5rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  font-size: var(--font-base);
+}
+
+#checkout-form .button {
+  margin-top: 1rem;
+  align-self: center;
+}
+
+.order-summary {
+  flex: 1 1 35%;
+  padding: 1rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary p {
+  font-size: var(--font-base);
+  margin: 0.5rem 0;
+}
+
+.order-summary .highlight {
+  font-weight: bold;
+  color: var(--primary-color);
 }

@@ -100,3 +100,7 @@ export function generateDiscountTag(finalPrice, suggestedRetailPrice) {
     ? `<p class="product__discount">Save $${discountAmount} (${discountPercent}% OFF)</p>`
     : "";
 }
+
+export function cartTotalReducerFunction(total, item) {
+  return total + (item.FinalPrice * item.Quantity);
+}

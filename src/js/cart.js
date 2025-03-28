@@ -1,4 +1,9 @@
-import { getLocalStorage, handleCartChange, loadHeaderFooter } from "./utils.mjs";
+import {
+  getLocalStorage,
+  handleCartChange,
+  loadHeaderFooter,
+  cartTotalReducerFunction,
+} from "./utils.mjs";
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -6,10 +11,11 @@ function renderCartContents() {
 
   // Check if cart is empty
   if (cartItems.length !== 0) {
-    const total = cartItems.reduce(reducerFunction, 0);
+    const total = cartItems.reduce(cartTotalReducerFunction, 0);
 
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
-    document.querySelector(".cart-total").textContent = `Total: $${total.toFixed(2)}`;
+    document.querySelector(".cart-total").textContent =
+      `Total: $${total.toFixed(2)}`;
 
     const deleteButtons = document.querySelectorAll(".close-btn");
     deleteButtons.forEach((button) => {
@@ -24,21 +30,29 @@ function renderCartContents() {
         updateQuantity(input.getAttribute("data-id"), input.value);
       });
     });
+
+    const checkoutButton = document.createElement("button");
+    checkoutButton.innerText = "Checkout";
+    checkoutButton.setAttribute("id", "cart-checkout-btn");
+
+    checkoutButton.addEventListener("click", () => {
+      window.location.replace("/checkout/index.html");
+    });
+
+    document.querySelector(".cart-button-wrapper").innerHTML = "";
+    document.querySelector(".cart-button-wrapper").appendChild(checkoutButton);
   } else {
-    document.querySelector(".product-list").innerHTML = `<p>Cart is currently empty. Add products</p>`;
+    document.querySelector(".product-list").innerHTML =
+      `<p>Cart is currently empty. Add products</p>`;
     document.querySelector(".cart-total").textContent = "";
   }
-}
-
-function reducerFunction(total, item) {
-  return total + (item.FinalPrice * item.Quantity);
 }
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <button class="close-btn" data-id="${item.Id}">X</button>
   <a href="#" class="cart-card__image">
-    <img src="${item.Image}" alt="${item.Name}" />
+    <img src="${item.Images.PrimarySmall}" alt="${item.Name}" />
   </a>
   <a href="#">
     <h2 class="card__name">${item.Name}</h2>
@@ -64,7 +78,7 @@ function updateQuantity(id, newQuantity) {
   var cartItems = getLocalStorage("so-cart");
 
   if (cartItems) {
-    const itemIndex = cartItems.findIndex(item => item.Id === id);
+    const itemIndex = cartItems.findIndex((item) => item.Id === id);
 
     if (itemIndex !== -1) {
       // Update the quantity
@@ -81,7 +95,7 @@ function deleteItem(id) {
   var cartItems = getLocalStorage("so-cart");
 
   if (cartItems) {
-    const itemIndex = cartItems.findIndex(item => item.Id === id);
+    const itemIndex = cartItems.findIndex((item) => item.Id === id);
 
     if (itemIndex !== -1) {
       cartItems.splice(itemIndex, 1);
