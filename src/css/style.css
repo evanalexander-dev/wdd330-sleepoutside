@@ -386,6 +386,17 @@ footer {
   padding: 0.5rem;
 }
 
+.alert span:hover {
+  cursor: pointer;
+}
+
+/* alert and success in the same time */
+.alert.success {
+  background: var(--secondary-color);
+  color: white;
+  border: var(--secondary-color) solid 0.1px;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;

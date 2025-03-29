@@ -105,9 +105,12 @@ export function cartTotalReducerFunction(total, item) {
   return total + (item.FinalPrice * item.Quantity);
 }
 
-export function alertMessage(message, scroll = true) {
+export function alertMessage(message, type = null, scroll = true) {
   const alert = document.createElement('div');
   alert.classList.add('alert');
+  if (type) {
+    alert.classList.add(type);
+  }
   alert.innerHTML = `
     <p>${message}</p>
     <span class="close-alert">X</span>
