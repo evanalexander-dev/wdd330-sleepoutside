@@ -104,6 +104,15 @@ export default class CheckoutProcess {
 
       Object.keys(message).forEach((key) => {
         alertMessage(message[key]);
+
+        const inputElement = document.getElementById(key);
+
+        if (inputElement) {
+          inputElement.classList.add('error');
+          inputElement.addEventListener('focus', () => {
+            inputElement.classList.remove('error');
+          });
+        }
       });
     }
   }

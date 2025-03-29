@@ -94,6 +94,10 @@ button {
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
+
+input.error {
+  background-color: rgb(243, 188, 188);
+}
 /* End utility classes */
 
 /* Cart icon styles */
