@@ -11,6 +11,7 @@ function productCardTemplate(product) {
                 <h3 class="card__name">${product.Name}</h3>
                 <p class="product-card__price">$${product.FinalPrice}</p>
                 </a>
+                <button class="quick-view-btn" data-id="${product.Id}">Quick View</button>
             </li>`;
 }
 
@@ -30,6 +31,7 @@ export default class ProductList {
       this.originalList = [...list];
       this.renderList(this.fullList);
       this.addSortListener();
+      this.addModalListener();
     } catch (err) {
       this.listElement.innerHTML = "<p>Unable to load products at this time. Please try again later.</p>";
     }
@@ -61,5 +63,39 @@ export default class ProductList {
         this.renderList(sorted);
       });
     }
+  }
+
+  addModalListener() {
+    const modal = document.getElementById("productModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalPrice = document.getElementById("modalPrice");
+    const modalColor = document.getElementById("modalColor");
+    const modalDescription = document.getElementById("modalDescription");
+    const closeBtn = document.querySelector(".modal-close-btn");
+
+    document.querySelectorAll(".quick-view-btn").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const productId = event.target.dataset.id;
+        const product = this.fullList.find((p) => p.Id == productId);
+
+        if (product) {
+          modalTitle.textContent = product.Name;
+          modalPrice.textContent = `Price: $${product.FinalPrice}`;
+          modalColor.textContent = `Color: ${product.Colors[0].ColorName}`
+          modalDescription.innerHTML = product.DescriptionHtmlSimple || "No description available.";
+          modal.style.display = "block";
+        }
+      });
+    });
+
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
   }
 }
