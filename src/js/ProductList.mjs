@@ -32,7 +32,16 @@ export default class ProductList {
       this.renderList(this.fullList);
       this.addSortListener();
       this.addModalListener();
+
+      const titleCaseCategory = this.category
+      .replace("-", " ")
+      .replace(
+        /\w\S*/g,
+        (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
+      );
+      document.querySelector("#breadcrumb").innerText = `${titleCaseCategory}->(${this.originalList.length} items)`;
     } catch (err) {
+      console.log(err);
       this.listElement.innerHTML = "<p>Unable to load products at this time. Please try again later.</p>";
     }
   }
