@@ -108,6 +108,7 @@ button {
 }
 .cart:hover svg {
   fill: gray;
+  cursor: pointer;
 }
 
 .cart a:visited,
@@ -132,6 +133,51 @@ button {
   font-size: 0.75rem;
   right: -5px;
   top: 5px;
+}
+
+/* Cart shake animation */
+@keyframes shake {
+  0% {
+    transform: translateX(0) scale(1) rotate(0deg); /* Start at the normal state */
+  }
+  25% {
+    transform: translateX(-8px) scale(1.1) rotate(-10deg); /* Move left with scale and rotation */
+  }
+  50% {
+    transform: translateX(8px) scale(1.1) rotate(10deg); /* Move right with scale and rotation */
+  }
+  75% {
+    transform: translateX(-8px) scale(1.1) rotate(-10deg); /* Move left again with scale and rotation */
+  }
+  100% {
+    transform: translateX(0) scale(1) rotate(0deg); /* Reset back to normal */
+  }
+}
+
+/* Keyframes for fade-in effect */
+@keyframes fadeIn {
+  0% {
+    opacity: 0; /* Start invisible */
+  }
+  50% {
+    opacity: 0.5; /* Halfway through fade */
+  }
+  100% {
+    opacity: 1; /* Fully visible */
+  }
+}
+
+/* Applying both shake and fade-in animation */
+#cart-icon.cart-icon-shake {
+  animation:
+    shake 0.6s ease-in-out,
+    fadeIn 0.6s ease-in-out; /* Apply shake and fade simultaneously */
+}
+
+#cart-icon {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease; /* Smooth transitions */
 }
 
 /* End cart icon styles */
@@ -163,6 +209,16 @@ button {
   align-items: center;
   list-style-type: none;
   padding: 0;
+}
+.product-categories li {
+  flex: 1 1 20%;
+  text-align: center;
+  margin: 0.5em;
+  transition: all 0.3s ease;
+}
+.product-categories li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--light-grey);
 }
 .product-categories li a {
   text-align: center;
@@ -383,4 +439,49 @@ footer {
 .order-summary .highlight {
   font-weight: bold;
   color: var(--primary-color);
+}
+
+.alert-box{
+  display: flex;
+  width: 90%;
+  height: auto;
+  margin: 1rem auto;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(233, 93, 93);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.alert-box span{
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#colorOptions{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.color-swatch {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.color-swatch img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.color-swatch img:hover, .color-swatch img.selected {
+  border: 2px solid #000;
 }

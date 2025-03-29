@@ -7,7 +7,9 @@ export default class ProductDetails {
     this.dataSource = dataSource;
   }
   async init() {
+    console.log("ProductDetails initialized");
     this.product = await this.dataSource.findProductById(this.productId);
+    console.log(this.product);
 
     this.renderProductDetails("main");
 
@@ -33,24 +35,47 @@ export default class ProductDetails {
   renderProductDetails(selector) {
     const title = document.querySelector("title");
     title.innerText = `Sleep Outside | ${this.product.Name}`;
-
+  
     const discountTag = generateDiscountTag(this.product.FinalPrice, this.product.SuggestedRetailPrice);
-
+  
+    // Generate color swatch buttons
+    const colorSwatches = this.product.Colors.map(color => 
+      `<button class="color-swatch" 
+               data-color="${color.ColorName}" 
+               data-image="${color.ColorPreviewImageSrc}">
+        <img src="${color.ColorChipImageSrc}" alt="${color.ColorName}" title="${color.ColorName}">
+      </button>`
+    ).join("");
+  
     const element = document.querySelector(selector);
-    element.insertAdjacentHTML(
-      "beforeend",
-      `<section class="product-detail">
+    element.innerHTML = `
+      <section class="product-detail">
         <h3>${this.product.Brand.Name}</h3>
         <h2 class="divider">${this.product.NameWithoutBrand}</h2>
-        <img class="divider" src="${this.product.Images.PrimaryLarge}" alt="${this.product.NameWithoutBrand}" />
+        <img id="productImage" class="divider" src="${this.product.Images.PrimaryLarge}" 
+             alt="${this.product.NameWithoutBrand}" loading="lazy" />
         <p class="product-card__price">$${this.product.FinalPrice}</p>
         ${discountTag}
-        <p class="product__color">${this.product.Colors[0].ColorName}</p>
+        <div class="product__colors">
+          <p>Select Color:</p>
+          <div id="colorOptions">${colorSwatches}</div>
+        </div>
         <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
         <div class="product-detail__add">
           <button id="addToCart" data-id="${this.product.Id}">Add to Cart</button>
         </div>
-      </section>`
-    );
+      </section>`;
+  
+    // Add event listeners for color selection
+    document.querySelectorAll(".color-swatch").forEach(button => {
+      button.addEventListener("click", (event) => {
+        this.updateProductColor(event.target.closest("button").dataset);
+      });
+    });
+  }
+  updateProductColor(colorData) {
+    document.getElementById("productImage").src = colorData.image;
   }
 }
+
+

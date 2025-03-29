@@ -1,5 +1,5 @@
 // Load the alerts.json file
-export default function loadAlerts() {
+export async function loadAlerts() {
   fetch(`../json/alerts.json`)
     .then((response) => response.json())
     .then((data) => {
