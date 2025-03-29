@@ -290,20 +290,6 @@ button {
   font-size: 1rem;
 }
 
-@media screen and (min-width: 500px) {
-  body {
-    max-width: 1080px;
-    margin: auto;
-  }
-  .mission {
-    font-size: 1.2em;
-  }
-  .cart-card {
-    font-size: inherit;
-    grid-template-columns: 150px auto 15%;
-  }
-}
-
 footer {
   font-size: var(--small-font);
   padding: 1em;
@@ -321,9 +307,10 @@ footer {
 /* Checkout page styles */
 .checkout {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 2rem;
   margin-bottom: 2rem;
+  flex-direction: column-reverse;
 }
 
 .checkout-container {
@@ -383,4 +370,40 @@ footer {
 .order-summary .highlight {
   font-weight: bold;
   color: var(--primary-color);
+}
+
+.alert {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--primary-color);
+  max-height: 2rem;
+  border: red solid 0.1px;
+  margin: 3px;
+  max-width: 100%;
+  padding: 0.5rem;
+}
+
+@media screen and (min-width: 500px) {
+  body {
+    max-width: 1080px;
+    margin: auto;
+  }
+  .mission {
+    font-size: 1.2em;
+  }
+  .cart-card {
+    font-size: inherit;
+    grid-template-columns: 150px auto 15%;
+  }
+  .alert {
+    margin: 3px 1rem;
+    max-width: 250px;
+  }
+  .checkout {
+    align-items: flex-start;
+    flex-direction: row;
+  }
 }

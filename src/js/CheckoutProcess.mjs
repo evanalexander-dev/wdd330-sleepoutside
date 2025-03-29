@@ -1,4 +1,4 @@
-import { cartTotalReducerFunction, getLocalStorage } from './utils.mjs';
+import { cartTotalReducerFunction, getLocalStorage, alertMessage } from './utils.mjs';
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -91,9 +91,24 @@ export default class CheckoutProcess {
 
     try {
       const response = await services.checkout(order);
-      console.log(response);
+
+      const orderId = response.orderId;
+      const message = response.message;
+
+      this.redirectToSuccessPage(orderId, message);
     } catch (err) {
       console.log(err);
+
+      // convert message to array so it can be iterated
+      let message = err.message;
+
+      Object.keys(message).forEach((key) => {
+        alertMessage(message[key]);
+      });
     }
+  }
+
+  redirectToSuccessPage(orderId, message) {
+    window.location.replace(`/checkout/success.html?orderId=${orderId}&message=${message}`);
   }
 }
