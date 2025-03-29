@@ -69,11 +69,11 @@ export async function loadTemplate(path) {
 }
 
 export async function loadHeaderFooter() {
-  const headerElement = document.querySelector("#main-header");
+  const headerElement = document.getElementById("main-header");
   const headerPartial = await loadTemplate("../public/partials/header.html");
   renderWithTemplate(headerPartial, headerElement, undefined, renderCartIcon);
 
-  const footerElement = document.querySelector("#main-footer");
+  const footerElement = document.getElementById("main-footer");
   const footerPartial = await loadTemplate("../public/partials/footer.html");
   renderWithTemplate(footerPartial, footerElement);
 }
@@ -94,25 +94,6 @@ function renderCartIcon() {
   cart.appendChild(cartLink);
 }
 
-<<<<<<< HEAD
-function animateCartIcon() {
-  const cartIcon = document.querySelector("#cart-icon");
-
-  if (cartIcon) {
-    // Remove the class before re-adding it to restart the animation
-    cartIcon.classList.remove("cart-icon-shake");
-
-    // Re-add the animation class to restart the animation
-    void cartIcon.offsetWidth; // Trigger reflow to ensure animation restarts
-    cartIcon.classList.add("cart-icon-shake");
-    
-    // Remove the class after the animation ends
-    cartIcon.addEventListener("animationend", () => {
-      cartIcon.classList.remove("cart-icon-shake");
-    });
-  }
-}
-=======
 export function calculateDiscount(finalPrice, suggestedRetailPrice) {
   const hasDiscount = finalPrice < suggestedRetailPrice;
   const discountAmount = hasDiscount ? (suggestedRetailPrice - finalPrice).toFixed(2) : 0;
@@ -132,4 +113,47 @@ export function generateDiscountTag(finalPrice, suggestedRetailPrice) {
 export function cartTotalReducerFunction(total, item) {
   return total + (item.FinalPrice * item.Quantity);
 }
->>>>>>> d145edbf45a967c6b0fa5a8bae1adc27e727121b
+
+function animateCartIcon() {
+  const cartIcon = document.querySelector("#cart-icon");
+
+  if (cartIcon) {
+    // Remove the class before re-adding it to restart the animation
+    cartIcon.classList.remove("cart-icon-shake");
+
+    // Re-add the animation class to restart the animation
+    void cartIcon.offsetWidth; // Trigger reflow to ensure animation restarts
+    cartIcon.classList.add("cart-icon-shake");
+    
+    // Remove the class after the animation ends
+    cartIcon.addEventListener("animationend", () => {
+      cartIcon.classList.remove("cart-icon-shake");
+    });
+  }
+}
+
+// Function to send alerts to the user
+export function alertMessage(message, scroll=true) {
+  const alertBox = document.createElement("div");
+  alertBox.className = "alert-box";
+  alertBox.innerHTML = `<p>${message}</p><span>X</span>`;
+
+  alertBox.addEventListener('click', function(e) {
+    if(e.target.tagName == 'SPAN') {
+      main.removeChild(this);
+    }
+  })
+
+  const main = document.querySelector("main");
+  main.insertBefore(alertBox, main.firstChild);
+
+  if(scroll) {
+    window.scrollTo(0, 0);
+  }
+
+}
+
+export function removeAllAlerts() {
+  const alerts = document.querySelectorAll(".alert");
+  alerts.forEach((alert) => document.querySelector("main").removeChild(alert));
+}

@@ -210,6 +210,16 @@ button {
   list-style-type: none;
   padding: 0;
 }
+.product-categories li {
+  flex: 1 1 20%;
+  text-align: center;
+  margin: 0.5em;
+  transition: all 0.3s ease;
+}
+.product-categories li:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px var(--light-grey);
+}
 .product-categories li a {
   text-align: center;
   text-decoration: none;
@@ -355,51 +365,6 @@ footer {
   padding: 1em;
 }
 
-<<<<<<< HEAD
-/* Index Menu Logos Div */
-.menu {
-  display: flex;
-  justify-content: space-between;
-  padding: 0;
-  margin: 0;
-}
-
-.menu ul {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 80px;
-  flex-wrap: wrap;
-  padding: 0.5em;
-}
-
-.menu li {
-  list-style-type: none;
-  padding: 0.5em;
-  text-align: center;
-  flex: 1 1 25%;
-  font-size: 0.5rem;
-}
-
-.menu a {
-  text-decoration: none;
-  color: black;
-  transition: all 0.4s ease;
-}
-.menu li {
-  transition: all 0.4s ease;
-}
-
-.menu li:hover {
-  transform: scale(1.1);
-}
-
-.menu a img {
-  width: 50px;
-  height: auto;
-  padding: 0;
-  margin: 0 auto;
-=======
 /* This will style the quantity input inside the cart items */
 .cart-card__quantity input[type="number"] {
   width: 50px; /* Adjust the width to make it smaller */
@@ -474,5 +439,23 @@ footer {
 .order-summary .highlight {
   font-weight: bold;
   color: var(--primary-color);
->>>>>>> d145edbf45a967c6b0fa5a8bae1adc27e727121b
+}
+
+.alert-box{
+  display: flex;
+  width: 90%;
+  height: auto;
+  margin: 1rem auto;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(233, 93, 93);
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.alert-box span{
+  font-weight: bold;
+  cursor: pointer;
 }

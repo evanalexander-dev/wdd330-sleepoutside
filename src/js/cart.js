@@ -2,10 +2,7 @@ import {
   getLocalStorage,
   handleCartChange,
   loadHeaderFooter,
-<<<<<<< HEAD
-=======
   cartTotalReducerFunction,
->>>>>>> d145edbf45a967c6b0fa5a8bae1adc27e727121b
 } from "./utils.mjs";
 
 function renderCartContents() {
@@ -55,14 +52,7 @@ function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <button class="close-btn" data-id="${item.Id}">X</button>
   <a href="#" class="cart-card__image">
-<<<<<<< HEAD
-    <img
-      src="${item.Images.PrimarySmall}"
-      alt="${item.Name}"
-    />
-=======
     <img src="${item.Images.PrimarySmall}" alt="${item.Name}" />
->>>>>>> d145edbf45a967c6b0fa5a8bae1adc27e727121b
   </a>
   <a href="#">
     <h2 class="card__name">${item.Name}</h2>
@@ -84,11 +74,6 @@ function cartItemTemplate(item) {
   return newItem;
 }
 
-<<<<<<< HEAD
-loadHeaderFooter();
-renderCartContents();
-// renderCartCount();
-=======
 function updateQuantity(id, newQuantity) {
   var cartItems = getLocalStorage("so-cart");
 
@@ -105,7 +90,6 @@ function updateQuantity(id, newQuantity) {
     }
   }
 }
->>>>>>> d145edbf45a967c6b0fa5a8bae1adc27e727121b
 
 function deleteItem(id) {
   var cartItems = getLocalStorage("so-cart");
@@ -119,10 +103,6 @@ function deleteItem(id) {
 
       handleCartChange();
       renderCartContents();
-<<<<<<< HEAD
-      // renderCartCount();
-=======
->>>>>>> d145edbf45a967c6b0fa5a8bae1adc27e727121b
     }
   }
 }

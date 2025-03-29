@@ -1,18 +1,6 @@
 import { renderListWithTemplate, generateDiscountTag } from "./utils.mjs";
 
 function productCardTemplate(product) {
-<<<<<<< HEAD
-  return `
-    <li class="product-card">
-      <a href="/product_pages/?product=${product.Id}">
-        <img src="${product.Images.PrimaryMedium}" alt="${product.Name}">
-        <h3>${product.Brand.Name}</h3>
-        <p>${product.NameWithoutBrand}</p>
-        <p class="product-card__price">$${product.FinalPrice}</p>
-      </a>
-    </li>
-    `;
-=======
   const discountTag = generateDiscountTag(product.FinalPrice, product.SuggestedRetailPrice);
 
   return `<li class="product-card">
@@ -24,7 +12,6 @@ function productCardTemplate(product) {
                 <p class="product-card__price">$${product.FinalPrice}</p>
                 </a>
             </li>`;
->>>>>>> d145edbf45a967c6b0fa5a8bae1adc27e727121b
 }
 
 export default class ProductList {
@@ -32,25 +19,6 @@ export default class ProductList {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
-<<<<<<< HEAD
-  }
-
-  async init() {
-    const list = await this.dataSource.getData(this.category);
-    this.renderList(list);
-    document.querySelector(".title").textContent = `Top Products: ${this.category.charAt(0).toUpperCase() + this.category.slice(1)}`;
-  }
-
-  renderList(list) {
-    // const htmlStrings = list.map(productCardTemplate);
-    // this.listElement.insertAdjacentHTML("afterbegin", htmlStrings.join(""));
-
-    // apply use new utility function instead of the commented code above
-    renderListWithTemplate(productCardTemplate, this.listElement, list);
-
-  }
-}
-=======
     this.fullList = [];
     this.originalList = [];
   }
@@ -95,4 +63,3 @@ export default class ProductList {
     }
   }
 }
->>>>>>> d145edbf45a967c6b0fa5a8bae1adc27e727121b
