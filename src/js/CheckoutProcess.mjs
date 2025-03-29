@@ -15,7 +15,6 @@ function formDataToJSON(formElement) {
 
 function packageItems(items) {
   const simplifiedItems = items.map((item) => {
-    console.log(item);
     return {
       id: item.Id,
       price: item.FinalPrice,
@@ -97,9 +96,6 @@ export default class CheckoutProcess {
 
       this.redirectToSuccessPage(orderId, message);
     } catch (err) {
-      console.log(err);
-
-      // convert message to array so it can be iterated
       let message = err.message;
 
       Object.keys(message).forEach((key) => {
