@@ -12,7 +12,6 @@ if (!message || !orderId) {
   window.location.replace("/");
 }
 
-
 document.getElementById("order-message").innerText = message;
 document.getElementById("order-id").innerText = orderId;
 
