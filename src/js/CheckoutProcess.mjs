@@ -1,4 +1,4 @@
-import { cartTotalReducerFunction, getLocalStorage } from './utils.mjs';
+import { cartTotalReducerFunction, getLocalStorage, alertMessage } from './utils.mjs';
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -91,9 +91,12 @@ export default class CheckoutProcess {
 
     try {
       const response = await services.checkout(order);
-      console.log(response);
+
+      window.location.replace(`/checkout/success.html?message=${response.message}&orderId=${response.orderId}`);
     } catch (err) {
-      console.log(err);
+      Object.keys(err.message).forEach((key) => {
+        alertMessage(err.message[key]);
+      });
     }
   }
 }

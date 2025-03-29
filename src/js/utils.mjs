@@ -104,3 +104,19 @@ export function generateDiscountTag(finalPrice, suggestedRetailPrice) {
 export function cartTotalReducerFunction(total, item) {
   return total + (item.FinalPrice * item.Quantity);
 }
+
+export function alertMessage(message, scroll = true) {
+  const alert = document.createElement("div");
+  alert.classList.add("alert");
+  alert.innerHTML = `<p>${message}</p><span class="alert-close">X</span>`;
+
+  alert.addEventListener("click", (e) => {
+    if (e.target.classList.contains("alert-close")) {
+      alert.remove();
+    }
+  });
+
+  document.querySelector("main").prepend(alert);
+
+  if (scroll) window.scrollTo(0, 0);
+}

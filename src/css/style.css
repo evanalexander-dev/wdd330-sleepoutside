@@ -454,3 +454,18 @@ footer {
   border-radius: 4px;
   font-size: var(--font-base);
 }
+
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+  max-width: 300px;
+  padding: 0.5rem;
+  margin: 1rem;
+}
+
+.alert-close {
+  cursor: pointer;
+}
