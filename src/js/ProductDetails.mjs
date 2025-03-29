@@ -16,6 +16,14 @@ export default class ProductDetails {
 
     document.getElementById("addToCart")
       .addEventListener("click", this.addToCart.bind(this));
+    
+      const titleCaseCategory = this.product.Category
+      .replace("-", " ")
+      .replace(
+        /\w\S*/g,
+        (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
+      );
+      document.querySelector("#breadcrumb").innerText = titleCaseCategory;
   }
 
   addToCart() {
