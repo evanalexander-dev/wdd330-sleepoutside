@@ -459,3 +459,29 @@ footer {
   font-weight: bold;
   cursor: pointer;
 }
+
+#colorOptions{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.color-swatch {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.color-swatch img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+}
+
+.color-swatch img:hover, .color-swatch img.selected {
+  border: 2px solid #000;
+}
