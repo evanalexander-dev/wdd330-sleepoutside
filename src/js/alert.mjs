@@ -4,6 +4,7 @@ export default function loadAlerts() {
     .then((response) => response.json())
     .then((data) => {
       createAlerts(data);
+      showRegistrationModal();
     })
     /* eslint-disable no-console */ // Allows console statements in this file
     .catch((error) => console.error(error));
@@ -33,6 +34,7 @@ function createAlerts(alerts) {
   }
 }
 
+// Function to display the registration modal
 function showRegistrationModal() {
   console.log("Checking if the modal should be displayed...");
 
@@ -41,9 +43,23 @@ function showRegistrationModal() {
 
     const modal = document.createElement('div');
     modal.className = 'registration-modal';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100%';
+    modal.style.height = '100%';
+    modal.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+    modal.style.display = 'flex';
+    modal.style.justifyContent = 'center';
+    modal.style.alignItems = 'center';
+    modal.style.zIndex = '1000';
 
     const modalContent = document.createElement('div');
     modalContent.className = 'modal-content';
+    modalContent.style.backgroundColor = 'white';
+    modalContent.style.padding = '20px';
+    modalContent.style.borderRadius = '8px';
+    modalContent.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
 
     const title = document.createElement('h2');
     title.textContent = 'Join & Win!';
@@ -54,9 +70,10 @@ function showRegistrationModal() {
 
     const closeButton = document.createElement('button');
     closeButton.textContent = 'Got it!';
+    closeButton.style.marginTop = '10px';
     closeButton.onclick = () => {
       modal.style.display = 'none';
-      localStorage.setItem('hasSeenModal', 'true'); // Prevents modal from appearing again
+      localStorage.setItem('hasSeenModal', 'true'); // Prevent modal from showing again
       console.log("Modal closed and saved to localStorage.");
     };
 
