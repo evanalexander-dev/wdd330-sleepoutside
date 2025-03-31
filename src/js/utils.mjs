@@ -31,7 +31,7 @@ export function getParam(param) {
 export function handleCartChange(cartQuantityElement = document.getElementById("cart-quantity-items")) {
   const cartItems = getLocalStorage("so-cart");
   if (cartItems) {
-    const cartQuantity = cartItems.length;
+    const cartQuantity = cartItems.reduce((acc, item) => acc + item.Quantity, 0);
     cartQuantityElement.innerText = cartQuantity;
     cartQuantityElement.classList.add("active");
   }
@@ -41,6 +41,7 @@ export function renderListWithTemplate(templateFn, parentElement, list, position
   if (clear) {
     parentElement.innerHTML = "";
   }
+
   const htmlCards = list.map(templateFn);
   parentElement.insertAdjacentHTML(position, htmlCards.join(""));
 }
@@ -82,6 +83,46 @@ function renderCartIcon() {
   handleCartChange(cartLink.querySelector("#cart-quantity-items"));
 
   cart.appendChild(cartLink);
+}
+
+export function calculateDiscount(finalPrice, suggestedRetailPrice) {
+  const hasDiscount = finalPrice < suggestedRetailPrice;
+  const discountAmount = hasDiscount ? (suggestedRetailPrice - finalPrice).toFixed(2) : 0;
+  const discountPercent = hasDiscount ? Math.round((discountAmount / suggestedRetailPrice) * 100) : 0;
+
+  return { hasDiscount, discountAmount, discountPercent };
+}
+
+export function generateDiscountTag(finalPrice, suggestedRetailPrice) {
+  const { hasDiscount, discountAmount, discountPercent } = calculateDiscount(finalPrice, suggestedRetailPrice);
+
+  return hasDiscount
+    ? `<p class="product__discount">Save $${discountAmount} (${discountPercent}% OFF)</p>`
+    : "";
+}
+
+export function cartTotalReducerFunction(total, item) {
+  return total + (item.FinalPrice * item.Quantity);
+}
+
+export function calculateDiscount(finalPrice, suggestedRetailPrice) {
+  const hasDiscount = finalPrice < suggestedRetailPrice;
+  const discountAmount = hasDiscount ? (suggestedRetailPrice - finalPrice).toFixed(2) : 0;
+  const discountPercent = hasDiscount ? Math.round((discountAmount / suggestedRetailPrice) * 100) : 0;
+
+  return { hasDiscount, discountAmount, discountPercent };
+}
+
+export function generateDiscountTag(finalPrice, suggestedRetailPrice) {
+  const { hasDiscount, discountAmount, discountPercent } = calculateDiscount(finalPrice, suggestedRetailPrice);
+
+  return hasDiscount
+    ? `<p class="product__discount">Save $${discountAmount} (${discountPercent}% OFF)</p>`
+    : "";
+}
+
+export function cartTotalReducerFunction(total, item) {
+  return total + (item.FinalPrice * item.Quantity);
 }
 
 

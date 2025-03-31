@@ -94,6 +94,9 @@ button {
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }
+.visually-hidden {
+  display: none;
+}
 /* End utility classes */
 
 /* Cart icon styles */
@@ -267,6 +270,29 @@ button {
   display: inline-block;
 }
 
+/* Checkout styles */
+#checkout-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*Sort controls*/
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+.sort-controls label {
+  font-weight: bold;
+}
+.sort-controls select {
+  padding: 5px 10px;
+  font-size: 1rem;
+}
+
 @media screen and (min-width: 500px) {
   body {
     max-width: 1080px;
@@ -286,36 +312,171 @@ footer {
   padding: 1em;
 }
 
-/* Cateogries */
-
-.categories {
-  display: flex;
-  justify-content: space-evenly;
-  /* padding: 0.5em; */
-  margin: 4em 0;
-  list-style-type: none;
+/* This will style the quantity input inside the cart items */
+.cart-card__quantity input[type="number"] {
+  width: 50px; /* Adjust the width to make it smaller */
+  height: 30px; /* Adjust the height to make it smaller */
+  padding: 5px; /* Add padding to ensure the number fits */
+  font-size: 14px; /* Adjust the font size to make it fit better */
+  text-align: center; /* Center the number inside the input */
 }
 
-.categories a {
-  text-decoration: none;
-  display: grid;
+/* Checkout page styles */
+.checkout {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.checkout-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#checkout-form {
+  flex: 1 1 60%;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#checkout-form div {
+  display: flex;
+  flex-direction: column;
+}
+
+#checkout-form label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+#checkout-form .input-field {
+  padding: 0.5rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  font-size: var(--font-base);
+}
+
+#checkout-form .button {
+  margin-top: 1rem;
+  align-self: center;
+}
+
+.order-summary {
+  flex: 1 1 35%;
+  padding: 1rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary p {
+  font-size: var(--font-base);
+  margin: 0.5rem 0;
+}
+
+.order-summary .highlight {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+#comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding: 0;
+}
+
+.comment-item .comment-content p {
+  margin: 0;
+}
+
+.comment-item {
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.comment-item p.comment-author {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 10px;
-  font: bolder;
+  justify-content: flex-start;
+}
+
+.comment-item p.comment-time {
+  font-size: var(--small-font);
+  color: var(--dark-grey);
+  text-align: right;
+}
+
+.comment-item img {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.comment-item .comment-content {
+  width: 100%;
+  background-color: var(--light-grey);
+  padding: 1rem;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.comments-section .comments-section__info {
+  font-size: var(--small-font);
   color: var(--dark-grey);
 }
 
-.categories a:hover {
-  color: var(--primary-color);
-}
-.categories a:hover img {
-  filter: grayscale(70%);
+.comment-form input,
+.comment-form textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 4px;
+  font-size: var(--font-base);
 }
 
-.categories a img {
-  width: 75px;
-  /* height: 50px; */
-  margin: 0 auto 10px;
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  margin: 10% auto;
+  width: 50%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.modal-close-btn {
+  float: right;
+  cursor: pointer;
+  font-size: 24px;
 }
