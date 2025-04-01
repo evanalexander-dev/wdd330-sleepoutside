@@ -1,4 +1,5 @@
-import { getLocalStorage, handleCartChange, setLocalStorage, generateDiscountTag } from "./utils.mjs";
+// import { getLocalStorage, handleCartChange, setLocalStorage, generateDiscountTag } from "./utils.mjs";
+import { getLocalStorage, handleCartChange, setLocalStorage, generateDiscountTag, alertMessage } from "./utils.mjs";
 
 export default class ProductDetails {
   constructor(productId, dataSource) {

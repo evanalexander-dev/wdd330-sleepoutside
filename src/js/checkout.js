@@ -14,4 +14,11 @@ document.forms["checkout-form"].addEventListener("submit", (e) => {
   e.preventDefault();
 
   checkoutProcess.checkout();
+  const form = e.target;
+  const chk_status = form.checkValidity();
+  form.reportValidity();
+
+  if (chk_status) {
+    checkoutProcess.checkout();
+  }
 });
