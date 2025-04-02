@@ -1,4 +1,4 @@
-import { cartTotalReducerFunction, getLocalStorage } from './utils.mjs';
+import { cartTotalReducerFunction, getLocalStorage, alertMessage } from './utils.mjs';
 import ExternalServices from "./ExternalServices.mjs";
 
 const services = new ExternalServices();
@@ -15,7 +15,6 @@ function formDataToJSON(formElement) {
 
 function packageItems(items) {
   const simplifiedItems = items.map((item) => {
-    console.log(item);
     return {
       id: item.Id,
       price: item.FinalPrice,
@@ -91,9 +90,30 @@ export default class CheckoutProcess {
 
     try {
       const response = await services.checkout(order);
-      console.log(response);
+
+      const orderId = response.orderId;
+      const message = response.message;
+
+      this.redirectToSuccessPage(orderId, message);
     } catch (err) {
-      console.log(err);
+      let message = err.message;
+
+      Object.keys(message).forEach((key) => {
+        alertMessage(message[key]);
+
+        const inputElement = document.getElementById(key);
+
+        if (inputElement) {
+          inputElement.classList.add('error');
+          inputElement.addEventListener('focus', () => {
+            inputElement.classList.remove('error');
+          });
+        }
+      });
     }
+  }
+
+  redirectToSuccessPage(orderId, message) {
+    window.location.replace(`/checkout/success.html?orderId=${orderId}&message=${message}`);
   }
 }

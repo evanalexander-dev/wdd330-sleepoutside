@@ -104,3 +104,27 @@ export function generateDiscountTag(finalPrice, suggestedRetailPrice) {
 export function cartTotalReducerFunction(total, item) {
   return total + (item.FinalPrice * item.Quantity);
 }
+
+export function alertMessage(message, type = null, scroll = true) {
+  const alert = document.createElement('div');
+  alert.classList.add('alert');
+  if (type) {
+    alert.classList.add(type);
+  }
+  alert.innerHTML = `
+    <p>${message}</p>
+    <span class="close-alert">X</span>
+  `;
+
+  alert.addEventListener('click', function (e) {
+    if (e.target.classList.contains('close-alert')) {
+      alert.remove();
+    }
+  })
+
+  const main = document.querySelector('main');
+  main.prepend(alert);
+
+  if (scroll)
+    window.scrollTo(0, 0);
+}
