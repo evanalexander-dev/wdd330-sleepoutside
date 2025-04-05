@@ -68,7 +68,9 @@ export default class ProductDetails {
       `<section class="product-detail">
         <h3>${this.product.Brand.Name}</h3>
         <h2 class="divider">${this.product.NameWithoutBrand}</h2>
-        <img class="divider" src="${this.product.Images.PrimaryLarge}" alt="${this.product.NameWithoutBrand}" />
+
+        ${this.buildImageCarousel(this.product.Images)}
+        
         <button class="wishlist_button" id="wishlistButton">&#9825</button>
         <p class="product-card__price">$${this.product.FinalPrice}</p>
         ${discountTag}
@@ -93,7 +95,68 @@ export default class ProductDetails {
         </div>
       </section>`
     );
+    this.initCarousel();
   }
+
+  initCarousel() {
+    const track = document.querySelector(".carousel-track");
+    const slides = document.querySelectorAll(".carousel-slide");
+    const prevBtn = document.querySelector(".carousel-button.prev");
+    const nextBtn = document.querySelector(".carousel-button.next");
+  
+    if (!track || !slides.length) return;
+  
+    let currentIndex = 0;
+    const slideWidth = slides[0].clientWidth;
+  
+    function updateCarousel() {
+      const offset = -(currentIndex * slideWidth);
+      track.style.transform = `translateX(${offset}px)`;
+    }
+  
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateCarousel();
+    });
+  
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateCarousel();
+    });
+  
+    window.addEventListener("resize", () => {
+      updateCarousel();
+    });
+  }
+
+
+  buildImageCarousel(images) {
+    const allImages = [images.PrimaryLarge, ...(images.ExtraImages?.map(img => img.Src) || [])];
+  
+    if (allImages.length === 1) {
+      return `<img class="divider" src="${allImages[0]}" alt="${this.product.NameWithoutBrand}" />`;
+    }
+  
+    const imageSlides = allImages.map((src) => `
+      <div class="carousel-slide">
+        <img src="${src}" alt="Product image" />
+      </div>
+    `).join("");
+  
+    return `
+      <div class="carousel-container">
+        <button class="carousel-button prev">&#10094;</button>
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            ${imageSlides}
+          </div>
+        </div>
+        <button class="carousel-button next">&#10095;</button>
+      </div>
+    `;
+  }
+  
+  
 
   renderComments() {
     const comments = getLocalStorage(`comments-${this.productId}`) || [];
