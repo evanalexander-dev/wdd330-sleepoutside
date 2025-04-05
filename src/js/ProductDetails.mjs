@@ -13,17 +13,18 @@ export default class ProductDetails {
     this.renderProductDetails("main");
     this.renderComments();
     this.addCommentListener();
+    this.addToWishlist();
 
     document.getElementById("addToCart")
       .addEventListener("click", this.addToCart.bind(this));
-    
-      const titleCaseCategory = this.product.Category
+
+    const titleCaseCategory = this.product.Category
       .replace("-", " ")
       .replace(
         /\w\S*/g,
         (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase(),
       );
-      document.querySelector("#breadcrumb").innerText = titleCaseCategory;
+    document.querySelector("#breadcrumb").innerText = titleCaseCategory;
   }
 
   addToCart() {
@@ -40,6 +41,21 @@ export default class ProductDetails {
     handleCartChange();
   }
 
+  addToWishlist() {
+    document.querySelector("#wishlistButton").addEventListener("click", () => {
+      const wishlistContent = getLocalStorage("so-wishlist") || [];
+      const productExists = wishlistContent.find(item => item.Id === this.productId);
+
+      if (!productExists) {
+        wishlistContent.push(this.product);
+        setLocalStorage("so-wishlist", wishlistContent);
+        // alert("Product added to your wishlist!");
+      } else {
+        // alert("Product is already in your wishlist!");
+      }
+    });
+  }
+
   renderProductDetails(selector) {
     const title = document.querySelector("title");
     title.innerText = `Sleep Outside | ${this.product.Name}`;
@@ -52,8 +68,10 @@ export default class ProductDetails {
       `<section class="product-detail">
         <h3>${this.product.Brand.Name}</h3>
         <h2 class="divider">${this.product.NameWithoutBrand}</h2>
+
         ${this.buildImageCarousel(this.product.Images)}
-    
+        
+        <button class="wishlist_button" id="wishlistButton">&#9825</button>
         <p class="product-card__price">$${this.product.FinalPrice}</p>
         ${discountTag}
         <p class="product__color">${this.product.Colors[0].ColorName}</p>
@@ -200,4 +218,5 @@ export default class ProductDetails {
       `);
     }
   }
+
 }

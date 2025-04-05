@@ -12,6 +12,10 @@ document.getElementById("zip").addEventListener("change", () => {
 
 document.forms["checkout-form"].addEventListener("submit", (e) => {
   e.preventDefault();
-
-  checkoutProcess.checkout();
+  const myForm = document.forms[0];
+  const chk_status = myForm.checkValidity();
+  myForm.reportValidity();
+  if (chk_status) {
+    checkoutProcess.checkout();
+  }
 });

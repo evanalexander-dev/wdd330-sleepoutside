@@ -85,6 +85,35 @@ function renderCartIcon() {
   cart.appendChild(cartLink);
 }
 
+function handleWishlistChange(wishlistQuantityElement = document.getElementById("wishlist-quantity-items")) {
+  const wishlistItems = getLocalStorage("so-wishlist");
+  if (wishlistItems) {
+    const wishlistQuantity = wishlistItems.reduce((acc, item) => acc + item.Quantity, 0);
+    wishlistQuantityElement.innerText = wishlistQuantity;
+    wishlistQuantityElement.classList.add("active");
+  }
+}
+
+// export function calculateDiscount(finalPrice, suggestedRetailPrice) {
+//   const hasDiscount = finalPrice < suggestedRetailPrice;
+//   const discountAmount = hasDiscount ? (suggestedRetailPrice - finalPrice).toFixed(2) : 0;
+//   const discountPercent = hasDiscount ? Math.round((discountAmount / suggestedRetailPrice) * 100) : 0;
+
+//   return { hasDiscount, discountAmount, discountPercent };
+// }
+
+// export function generateDiscountTag(finalPrice, suggestedRetailPrice) {
+//   const { hasDiscount, discountAmount, discountPercent } = calculateDiscount(finalPrice, suggestedRetailPrice);
+
+//   return hasDiscount
+//     ? `<p class="product__discount">Save $${discountAmount} (${discountPercent}% OFF)</p>`
+//     : "";
+// }
+
+export function cartTotalReducerFunction(total, item) {
+  return total + (item.FinalPrice * item.Quantity);
+}
+
 export function calculateDiscount(finalPrice, suggestedRetailPrice) {
   const hasDiscount = finalPrice < suggestedRetailPrice;
   const discountAmount = hasDiscount ? (suggestedRetailPrice - finalPrice).toFixed(2) : 0;
@@ -101,6 +130,11 @@ export function generateDiscountTag(finalPrice, suggestedRetailPrice) {
     : "";
 }
 
-export function cartTotalReducerFunction(total, item) {
-  return total + (item.FinalPrice * item.Quantity);
+// export function cartTotalReducerFunction(total, item) {
+//   return total + (item.FinalPrice * item.Quantity);
+// }
+
+
+export function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }

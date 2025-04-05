@@ -49,6 +49,7 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
+  console.log(item);
   const newItem = `<li class="cart-card divider">
   <button class="close-btn" data-id="${item.Id}">X</button>
   <a href="#" class="cart-card__image">
